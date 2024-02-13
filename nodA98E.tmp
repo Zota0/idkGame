@@ -1,0 +1,56 @@
+[gd_scene load_steps=8 format=3 uid="uid://dpo02h61ksw2a"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_38ft8"]
+[ext_resource type="Texture2D" uid="uid://c5jvdnataenno" path="res://icon.svg" id="1_tu80a"]
+[ext_resource type="Script" path="res://bulletGen.gd" id="3_6if1s"]
+[ext_resource type="PackedScene" uid="uid://bbn35olhrrh0t" path="res://bullet.tscn" id="4_ojog3"]
+
+[sub_resource type="Gradient" id="Gradient_h1x8y"]
+interpolation_mode = 2
+interpolation_color_space = 2
+offsets = PackedFloat32Array(0.1, 0.9)
+colors = PackedColorArray(0.197937, 0.197937, 0.197937, 1, 0.0253638, 0.0253638, 0.0253638, 1)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_jn74i"]
+gradient = SubResource("Gradient_h1x8y")
+width = 2440
+height = 2440
+use_hdr = true
+fill = 1
+fill_to = Vector2(-1, -1)
+repeat = 2
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bk6ct"]
+size = Vector2(128, 128)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(800, 380)
+scale = Vector2(1.56434, 1.26803)
+texture = SubResource("GradientTexture2D_jn74i")
+
+[node name="player" type="CharacterBody2D" parent="."]
+position = Vector2(0, 156)
+collision_layer = 2
+script = ExtResource("1_38ft8")
+
+[node name="Sprite2D" type="Sprite2D" parent="player"]
+texture = ExtResource("1_tu80a")
+
+[node name="Collision" type="CollisionShape2D" parent="player"]
+shape = SubResource("RectangleShape2D_bk6ct")
+
+[node name="Polygon2D" type="Polygon2D" parent="player"]
+z_index = 10
+color = Color(1, 0, 0, 1)
+polygon = PackedVector2Array(0, -176, 64, 0, 0, 64, -64, 0)
+
+[node name="Camera2D" type="Camera2D" parent="player"]
+
+[node name="bulletGen" type="Node2D" parent="."]
+script = ExtResource("3_6if1s")
+
+[node name="bullet" parent="bulletGen" instance=ExtResource("4_ojog3")]
+collision_layer = 1

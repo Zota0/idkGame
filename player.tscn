@@ -1,0 +1,113 @@
+[gd_scene load_steps=9 format=3 uid="uid://c46bt2v6cb4jf"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_8eogj"]
+[ext_resource type="Texture2D" uid="uid://c5jvdnataenno" path="res://icon.svg" id="2_0swws"]
+[ext_resource type="Script" path="res://Marker.gd" id="3_8woic"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bk6ct"]
+size = Vector2(128, 128)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ivrge"]
+bg_color = Color(0, 0.666667, 0.807843, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0.470588, 1, 1)
+border_blend = true
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+corner_detail = 20
+shadow_color = Color(0, 0, 0.8, 0.835294)
+shadow_size = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0c23k"]
+bg_color = Color(1, 0.168627, 0, 1)
+border_width_left = 20
+border_width_top = 20
+border_width_right = 20
+border_width_bottom = 20
+border_color = Color(0.8, 0, 0.8, 1)
+border_blend = true
+corner_radius_top_left = 75
+corner_radius_top_right = 75
+corner_radius_bottom_right = 75
+corner_radius_bottom_left = 75
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kg2wh"]
+bg_color = Color(0, 0, 0.341176, 1)
+border_width_left = 10
+border_width_top = 8
+border_width_right = 10
+border_width_bottom = 8
+border_color = Color(0, 0.8, 0.8, 1)
+border_blend = true
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+shadow_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_l7ivc"]
+line_spacing = 0.0
+outline_size = 12
+outline_color = Color(0, 0, 0.560784, 1)
+shadow_size = 16
+shadow_color = Color(0, 0, 0, 0.972549)
+
+[node name="player" type="CharacterBody2D" groups=["player"]]
+position = Vector2(0, 156)
+collision_layer = 2
+script = ExtResource("1_8eogj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_0swws")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_bk6ct")
+
+[node name="Aim" type="Polygon2D" parent="."]
+z_index = 10
+color = Color(1, 1, 1, 0)
+polygon = PackedVector2Array(192, -8, 236, 0, 192, 8, -4, 0)
+
+[node name="AimCross" type="Marker2D" parent="Aim"]
+position = Vector2(0.5, 0)
+script = ExtResource("3_8woic")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -76.0
+offset_top = -104.5
+offset_right = 76.0
+offset_bottom = -71.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 1
+theme_override_styles/background = SubResource("StyleBoxFlat_ivrge")
+theme_override_styles/fill = SubResource("StyleBoxFlat_0c23k")
+rounded = true
+allow_lesser = true
+
+[node name="KillCount" type="Label" parent="."]
+texture_filter = 6
+texture_repeat = 1
+offset_left = 384.0
+offset_top = -324.0
+offset_right = 574.0
+offset_bottom = -285.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_kg2wh")
+text = "KILL COUNT: {Count}"
+label_settings = SubResource("LabelSettings_l7ivc")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+text_direction = 1

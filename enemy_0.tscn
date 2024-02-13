@@ -1,0 +1,71 @@
+[gd_scene load_steps=6 format=3 uid="uid://di4vy3bonlug5"]
+
+[ext_resource type="Script" path="res://Enemy_0.gd" id="1_fj17p"]
+[ext_resource type="Texture2D" uid="uid://c5jvdnataenno" path="res://icon.svg" id="2_fc8ow"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7oh4f"]
+size = Vector2(128, 128)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ndiuj"]
+bg_color = Color(0, 0.666667, 0.807843, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0.470588, 1, 1)
+border_blend = true
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+corner_detail = 20
+shadow_color = Color(0, 0, 0.8, 0.835294)
+shadow_size = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hygci"]
+bg_color = Color(1, 0.168627, 0, 1)
+border_width_left = 20
+border_width_top = 20
+border_width_right = 20
+border_width_bottom = 20
+border_color = Color(0.8, 0, 0.8, 1)
+border_blend = true
+corner_radius_top_left = 75
+corner_radius_top_right = 75
+corner_radius_bottom_right = 75
+corner_radius_bottom_left = 75
+
+[node name="Enemy_0" type="CharacterBody2D"]
+motion_mode = 1
+wall_min_slide_angle = 0.523599
+script = ExtResource("1_fj17p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_7oh4f")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.666667, 0.192157, 0.172549, 1)
+texture = ExtResource("2_fc8ow")
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -76.0
+offset_top = -108.0
+offset_right = 76.0
+offset_bottom = -68.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(76, 108)
+size_flags_vertical = 1
+theme_override_styles/background = SubResource("StyleBoxFlat_ndiuj")
+theme_override_styles/fill = SubResource("StyleBoxFlat_hygci")
+rounded = true
+allow_lesser = true
+
+[node name="EnemyNav" type="NavigationAgent2D" parent="."]
+debug_enabled = true
+debug_path_custom_color = Color(0.639216, 0, 0, 1)
